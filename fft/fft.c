@@ -84,7 +84,8 @@ int main(int argc,char **argv)
     if(rank == 0)
     {
         //fin = fopen(argv[1], "r");
-        size2 = atoi(argv[1]);
+        size2 = 1;
+        for (int i = 0; i < atoi(argv[1]); i++) size2 *= 2;
         //fout = fopen(argv[2], "w");
         n=size2;
         for (i=0;i<n;i++)
