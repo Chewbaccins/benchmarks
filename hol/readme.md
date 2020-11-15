@@ -1,3 +1,5 @@
+# Cholesky Decomposition
+
 ### Serial tests
 testSerial.c contains tests for the serial implementation 
 ###### compile
