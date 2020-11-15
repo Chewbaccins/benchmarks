@@ -5,7 +5,6 @@
 #include <time.h>
 #include <stdlib.h>
 #include <time.h>
-
 #include "matrix.h"
 #include "cholSerial.h"
 
@@ -47,6 +46,7 @@ int main(int argc, char **argv)
     clock_gettime(CLOCK_MONOTONIC, &end); //Get the current time.
     
     testBasicOutputOfChol(A,L,matrixSize);
+    
     //Test execution time
     printf("The serial computation took %.5f seconds\n",
            ((double)end.tv_sec + 1.0e-9 * end.tv_nsec) - 
@@ -57,17 +57,12 @@ int main(int argc, char **argv)
            ((double)begin.tv_sec + 1.0e-9 * begin.tv_nsec));
     double computations = 0;
     computations += matrixSize;
-    printf("%f\n", computations);
     computations += ((double)matrixSize * (matrixSize - 1) / 2);
-    printf("%f\n", computations);
     computations /= 1000000000;
-    printf("%f\n", computations);
     double temp = ((double)matrixSize * matrixSize * matrixSize) / 1000000000;
-    printf("%f\n", temp);
     computations += (temp - (double)matrixSize / 1000000000) / 3;
-    printf("%f\n", computations);
     
-    printf("Serial %f GFLOPs\n", 
+    printf("Serial %f GFLOPs\n\n", 
            ( computations / time));
     return 0;
 }

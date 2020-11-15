@@ -1,0 +1,8 @@
+# add OMP to queue
+#BSUB -n 1 -q normal
+#BSUB -W 0:20
+#BSUB -R "rusage[ut=1]"
+#BSUB -J "hol_MPI"
+#BSUB -o "results/hol_MPI.%J.out"
+#BSUB -e "errors/hol_MPI.%J.err"
+mpiexec ./cholMPI 100

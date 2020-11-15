@@ -6,7 +6,6 @@
 #include <stdlib.h>
 #include <time.h>
 #include <omp.h>
-
 #include "matrix.h"
 #include "cholOMP.h"
 
@@ -67,10 +66,8 @@ int main(int argc, char **argv)
     computations += ((double)matrixSize * matrixSize * matrixSize - matrixSize) / 6000000000;
     computations += ((double)matrixSize * matrixSize * matrixSize - matrixSize) / 6000000000;
     
-    printf("OMP %.5f GFLOPs\n", 
+    printf("OMP %.5f GFLOPs\n\n", 
            ( computations / time));
-
-    printf("\n");
     return 0;
 }
 

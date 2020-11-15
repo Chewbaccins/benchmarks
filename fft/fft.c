@@ -4,8 +4,8 @@
 #include <malloc.h>
 #include <math.h>
 #include <string.h>
-#define LINE 65536
-#define MAXN 65536
+#define LINE 131072
+#define MAXN 131072
 #define PI 3.14159265
 
 char linie[LINE];
@@ -60,16 +60,20 @@ int* decimal_to_binary(int number)
 
 int main(int argc,char **argv)
 {
+    if (argc != 2) {
+        printf("size required\n");
+        return 0;
+    }
     MPI_Status Stat;
-    int j, k, p, m;
+    int j, p, m;
     int putere = 1;
     int i1, i2, i3;
-    int dif;
+    //int dif;
     int *b;
-    int size,size2;
+    int size2;
     int index;
     int  numtasks, rank, rc, tag = 1;
-    FILE *fin, *fout;
+    //FILE *fin, *fout;
     double Rx[MAXN], Ry[MAXN], Sx[MAXN], Sy[MAXN];
     double alfa, time_start, time_finish;
 
@@ -84,14 +88,15 @@ int main(int argc,char **argv)
     if(rank == 0)
     {
         //fin = fopen(argv[1], "r");
-        size2 = 1;
-        for (int i = 0; i < atoi(argv[1]); i++) size2 *= 2;
+        size2 = atoi(argv[1]);
         //fout = fopen(argv[2], "w");
         n=size2;
+        //printf("n = %d\n", atoi(argv[1]));
         for (i=0;i<n;i++)
         {
             x[i]=rand();
         }
+        //printf("%d\n", rand());
          r = log2_local(n);
          time_start = MPI_Wtime();
          //trimit n,r, si x tuturor procesoarelor
@@ -100,8 +105,6 @@ int main(int argc,char **argv)
                MPI_Send(&n, 1, MPI_INT, i, tag, MPI_COMM_WORLD);
                MPI_Send(&r, 1, MPI_INT, i, tag, MPI_COMM_WORLD);
                MPI_Send(&x, n, MPI_DOUBLE, i, tag, MPI_COMM_WORLD);
-
-
          }
 
          //bucla exterioara
@@ -134,8 +137,8 @@ int main(int argc,char **argv)
          }
          
          time_finish = MPI_Wtime()-time_start;
-         double Gflops = 2 * (log2(size2)) / time_finish / 1000000000.;
-         printf("size = %d procs = %d time = %lf GFLOPS = %.9lf\n", size2, numtasks, time_finish, Gflops);
+         double flops = 2 * (log2(size2)) / time_finish;
+         printf("size = %d procs = %d time = %lf FLOPS = %.9lf\n", size2, numtasks, time_finish, flops);
          //afisez rezultatul final
          //for(i = 0 ; i < n ; i ++)
          //{

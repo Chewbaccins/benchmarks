@@ -1,6 +1,7 @@
 #include "matrix.h"
 #include "cholMPI.h"
 #include <mpi.h>
+
 int main(int argc, char **argv)
 {
     // generate seed
@@ -39,3 +40,5 @@ int main(int argc, char **argv)
 
     MPI_Finalize();
 }
+
+
