@@ -1,3 +1,5 @@
+# Cooley–Tukey FFT algorithm
+
 ### MPI tests
 fft.c contains tests for MPI implementation
 ###### compile
