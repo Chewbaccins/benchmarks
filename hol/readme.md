@@ -1,14 +1,20 @@
-### Serial tests
-testSerial.c contains tests for the serial implementation
+```### Serial tests
+testSerial.c contains tests for the serial implementation 
+##### compile
 make cholSerial
-./cholSerial [matrix size]
+##### run
+./cholSerial [matrix size]```
 
-### Serial and OpenMP tests
+```### Serial and OpenMP tests
 testOMP.c contains tests for the serial and OpenMP implementation
+##### compile
 make cholOMP
-./cholOMP [matrix size] [number of threads]
+##### run
+./cholOMP [matrix size] [number of threads]```
 
-### MPI tests
+```### MPI tests
 testMPI.c contains tests for MPI implementation
+##### compile 
 make cholMPI
-mpirun -np [number of processes] ./cholMPI [matrix size]
+##### run
+mpirun -np [number of processes] ./cholMPI [matrix size]```
