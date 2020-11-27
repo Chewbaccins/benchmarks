@@ -64,6 +64,20 @@ int main(int argc,char **argv)
         printf("size required\n");
         return 0;
     }
+    if ((atoi(argv[1]) < 2) || (atoi(argv[1]) > MAXN)) {
+        printf("please input smaller problem size (must be less then 131072 and equal to 2^n)\n");
+        return 1;
+    }
+    short flag = 0;
+    long temp_num = atoi(argv[1]);
+    while (flag == 0) {
+        if ((temp_num % 2) == 1){
+            printf("please input correct problem size (must be less then 131072 and equal to 2^n)\n");
+            return 1;
+        }
+        temp_num /= 2;
+        if (temp_num == 2) flag = 1;
+    }
     MPI_Status Stat;
     int j, p, m;
     int putere = 1;
@@ -139,6 +153,10 @@ int main(int argc,char **argv)
          time_finish = MPI_Wtime()-time_start;
          double flops = 2 * (log2(size2)) / time_finish;
          printf("size = %d procs = %d time = %lf FLOPS = %.9lf\n", size2, numtasks, time_finish, flops);
+         FILE* outfile;
+         outfile = fopen("results.out", "a");
+         fprintf( outfile, "%f\n", flops);
+         fclose(outfile);
          //afisez rezultatul final
          //for(i = 0 ; i < n ; i ++)
          //{
